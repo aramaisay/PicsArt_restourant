@@ -1,0 +1,13 @@
+.dropCont {
+    min-width: 7rem;
+    height: 60%;
+    background-color: #fddf9f;
+    color: #131313;
+    font-size: 1rem;
+    border: 0.25rem solid #ffa93b;
+    border-radius: 1.5rem;
+    padding-left: 0.75rem; 
+}
+.dropOpt {
+    border: #ffa93b solid 0.25rem;
+}

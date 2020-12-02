@@ -1,0 +1,12 @@
+.search {
+    min-width: 20rem;
+    max-width: 40rem;
+    width: 60%;
+    margin: 0 1rem 0 0;
+    height: 60%;
+    border-radius: 2rem;
+    background-color: #fddf9f;
+    border: 0.25rem solid #ffa93b;
+    padding: 0 1rem;
+    color: #131313;
+}

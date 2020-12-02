@@ -1,0 +1,10 @@
+.rangeInput {
+    width: 6rem;
+    height: 60%;
+    margin: 0 0 0 1rem;
+    border-radius: 2rem;
+    background-color: #fddf9f;
+    border: 0.25rem solid #ffa93b;
+    padding: 0 1rem;
+    color: #131313;
+}

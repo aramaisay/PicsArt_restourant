@@ -1,0 +1,17 @@
+.btnBack {
+    width: 3rem;
+    height: 3rem;
+    position: fixed;
+    top: 7rem;
+    background-color: #fddf9f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-right-radius: 1rem;
+    color: #131313;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-bottom: 0.25rem solid #ffa93b;
+    border-right: 0.25rem solid #ffa93b;
+    cursor: pointer;
+}

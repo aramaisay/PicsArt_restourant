@@ -1,0 +1,43 @@
+.cardCont {
+    min-width: 20rem;
+    width: 25%;
+    height: 15rem;
+    overflow: hidden;
+    border-radius: 2rem;
+    position: relative;
+    cursor: pointer;
+    margin: 0 2rem 2rem;
+}
+.cardImg {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.cardInfo {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 75%;
+    bottom: -100%;
+    background-color: rgba(255, 169, 59, 0.8);
+    border-radius: 2rem;
+    transition: all 0.2s linear;
+    color: #131313;
+}
+.cardCont:hover .cardInfo {
+    bottom: 0;
+}
+.cardTitle {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 1.5rem;
+}
+.cardTypes {
+    font-size: 1rem;
+    padding-left: 1rem;
+    text-transform: capitalize;
+    font-weight: 700;
+}

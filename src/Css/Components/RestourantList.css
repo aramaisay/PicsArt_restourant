@@ -1,0 +1,7 @@
+.resList {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 2rem 0;
+}

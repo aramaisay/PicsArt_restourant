@@ -1,0 +1,15 @@
+.mainCont {
+    width: 100vw;
+    padding: 7rem 0 0;
+    background-color: #131313;
+    color: #ffa93b;
+    min-height: 100vh;
+}
+.searchCont {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}

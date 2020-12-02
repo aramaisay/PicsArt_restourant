@@ -1,0 +1,18 @@
+.loaderCont {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+.loaderImg {
+    width: 10rem;
+    height: 10rem;
+    margin-bottom: 2rem;
+
+}
+.loaderText {
+    color: #ffa93b;
+    font-size: 2rem;
+}
