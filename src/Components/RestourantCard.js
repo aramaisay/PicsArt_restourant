@@ -1,10 +1,10 @@
-import React, {memo} from 'react';
-import {isEqual} from 'lodash';
+import React, { memo } from 'react';
+import { isEqual } from 'lodash';
 import { useHistory } from 'react-router-dom';
 
 import '../Css/Components/RestourantCard.css';
 
-const RestourantCard = ({name, photoUrl, id, kitchenTypes}) => {
+const RestourantCard = ({ name, photoUrl, id, kitchenTypes }) => {
     const history = useHistory();
 
     return (

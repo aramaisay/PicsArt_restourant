@@ -1,7 +1,7 @@
-import React, {forwardRef} from 'react';
-import {useSelector} from 'react-redux';
+import React, { forwardRef } from 'react';
+import { useSelector } from 'react-redux';
 
-import {kitchenTypeSelector} from '../Redux/Selectors'
+import { kitchenTypeSelector } from '../Redux/Selectors'
 
 import '../Css/Components/DropBox.css';
 

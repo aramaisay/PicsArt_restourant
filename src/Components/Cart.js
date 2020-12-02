@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { cartSelector } from '../Redux/Selectors';
 import { CART_ORDER_OBJ } from '../Redux/Actions';
@@ -14,7 +14,7 @@ const Cart = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    if(data.length>0 && !isOrdered) {
+    if(data.length > 0 && !isOrdered) {
         return (
             <div className = 'cartCont' >
                 {data.map((item) => <CartItem key = {item.id} {...item} />)}

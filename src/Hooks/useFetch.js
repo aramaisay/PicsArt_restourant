@@ -1,11 +1,11 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 import store from '../Redux/Store';
 
 const cache = new Map();
 
 export const createCache = (type, payload) => {
-    const {text, min, max, resId, kitchenType } = payload;
+    const { text, min, max, resId, kitchenType } = payload;
     const capitalized = text.toUpperCase();
     return new Promise((resolve) => {
         switch(type) {

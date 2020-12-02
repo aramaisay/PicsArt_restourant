@@ -1,10 +1,10 @@
-import React, {memo} from 'react';
-import {isEqual} from 'lodash';
+import React, { memo } from 'react';
+import { isEqual } from 'lodash';
 import { useDispatch } from 'react-redux';
 
 import { CART_DELETE_OBJ, CART_QUANTITY_OBJ } from '../Redux/Actions';
 
-const CartItem = ({id, name, photoUrl, price, quantity, resId}) => {
+const CartItem = ({ id, name, photoUrl, price, quantity, resId }) => {
     const dispatch = useDispatch();
     return(
         <div className = 'itemCont' >

@@ -1,12 +1,12 @@
-import React, {memo} from 'react';
-import {isEqual} from 'lodash';
+import React, { memo } from 'react';
+import { isEqual } from 'lodash';
 
 import Loader from './Loader';
 import RestourantCard from './RestourantCard';
 
 import '../Css/Components/RestourantList.css'
 
-const RestourantList = ({data, isLoading}) => {
+const RestourantList = ({ data, isLoading }) => {
     return (
         isLoading?
         <Loader></Loader>

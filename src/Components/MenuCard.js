@@ -1,10 +1,10 @@
-import React, {memo} from 'react';
-import {useDispatch} from 'react-redux';
-import {isEqual} from 'lodash';
+import React, { memo } from 'react';
+import { useDispatch } from 'react-redux';
+import { isEqual } from 'lodash';
 
-import {CART_ADD_OBJ} from '../Redux/Actions'
+import { CART_ADD_OBJ } from '../Redux/Actions'
 
-const MenuCard = ({resId, id, name, photoUrl, price}) => {
+const MenuCard = ({ resId, id, name, photoUrl, price }) => {
     const dispatch = useDispatch();
 
     return (

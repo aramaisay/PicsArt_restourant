@@ -1,5 +1,5 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import logo from '../Assets/logo.jpg';
 import '../Css/Components/Navbar.css';
