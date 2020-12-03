@@ -1,4 +1,4 @@
-import React, { useEffect, useRef} from 'react';
+import React, { useEffect, useState } from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 
 import SearchBox from '../Components/SearchBox';
@@ -13,33 +13,33 @@ const Restourant = () => {
     const {id} = useParams();
     const history = useHistory();
     
-    const maxRef = useRef();
-    const minRef = useRef();
+    const [text, setText] = useState('');
+    const [range, setRange] = useState({min: 0, max: 2000});
 
     useEffect(() => {
         fetchData('menuSearch', { 
             resId: id, 
-            text: '', 
-            min: minRef.current.value, 
-            max: maxRef.current.value
+            text: text, 
+            min: range.min, 
+            max: range.max
         })
-    }, [])
+    }, [text, range])
 
-    const onChange = (e) => {
-        fetchData('menuSearch', { 
-            resId: id, 
-            text: e.target.value, 
-            min: minRef.current.value, 
-            max: maxRef.current.value
-        })
+    const onChangeText = (e) => {
+        setText(e.target.value);
+    }
+    const onChangeRange = (e) => {
+        setRange((prevState) => {
+            return {...prevState, [e.target.name]: e.target.value};
+        });
     }
 
     return (
         <div className = 'mainCont' >
             <div className = 'btnBack' onClick = {() => {history.goBack()}} > {'<'} </div>
             <div className = 'searchCont' >
-                <SearchBox placeholder = 'Type the name of the dish' onChange = {onChange} />
-                <Range minRef = {minRef} ref = {maxRef} />
+                <SearchBox onChange = {onChangeText} placeholder = 'Type the name of the dish' />
+                <Range onChange = {onChangeRange} />
             </div>
             <MenuList data = {data} isLoading = {isLoading} resId = {id} />
         </div>
