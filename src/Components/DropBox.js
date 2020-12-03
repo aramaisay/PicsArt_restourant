@@ -1,5 +1,6 @@
-import React, { forwardRef } from 'react';
+import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
+import {isEqual} from 'lodash';
 
 import { kitchenTypeSelector } from '../Redux/Selectors'
 
@@ -16,4 +17,4 @@ const DropBox = ({onChange}) => {
     );
 };
 
-export default DropBox;
+export default memo(DropBox, isEqual);
