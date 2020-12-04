@@ -1,42 +1,41 @@
-import {produce} from 'immer';
+import {produce} from 'immer'; 
 
-import { CART_ADD, CART_DELETE, CART_ORDER, CART_QUANTITY_CHANGE } from '../Actions';
+import { CART_ADD, CART_DELETE, CART_ORDER, CART_QUANTITY_CHANGE, RES_ADD, DISHES_ADD, TYPES_ADD } from '../Actions';
 import { initialState } from '../InitialState';
 
 const reducer = produce((state, action) => {
     const {type, payload} = action;
-    const {amount, resId, itemId} = payload?payload:{amount:0, resId:-1,itemId:-1};
+    const {amount, resId, itemId, data} = payload?payload:{amount:0, resId:-1,itemId:-1};
     switch(type) {
         case CART_ADD:
-            const isThere = state[3].find((item) => item.resId === resId && item.id === itemId);
+            const isThere = state.cart.find((item) => item.resId === resId && item.id === itemId);
             if(isThere) {
                 return state;
             }
-            const menu = state[1][resId-1];
-            const item = menu.find((dish) => dish.id === itemId);
-            state[3].push({...item, quantity: 1, resId});
-            state[4] += item.price;
+            const item = state.dishes.find((dish) => dish.id === itemId);
+            state.cart.push({...item, quantity: 1, resId});
+            state.price += item.price;
             return state;
         case CART_DELETE:
-            state[3].filter((item, index) => {
+            state.cart.filter((item, index) => {
                 if(item.id === itemId && item.resId === resId) {
-                    state[4] -= item.price*item.quantity;
-                    state[3].splice(index,1);
+                    state.price -= item.price*item.quantity;
+                    state.cart.splice(index,1);
                 }
-                return ;
+                return;
             })
             return state;
         case CART_QUANTITY_CHANGE:
-            if(amount>=0) {
-                state[3].filter((item, index) => {
+            if(amount >= 0) {
+                state.cart.filter((item, index) => {
                     if(item.id === itemId && item.resId === resId) {
-                        if(amount>0) {
-                            state[4] -= item.price * item.quantity;
-                            state[4] += item.price * amount;
+                        if(amount > 0) {
+                            state.price -= item.price * item.quantity;
+                            state.price += item.price * amount;
                         }
                         else {
-                            state[4] -= item.price*item.quantity;
-                            state[3].splice(index,1);
+                            state.price -= item.price*item.quantity;
+                            state.cart.splice(index,1);
                         }
                         item.quantity = amount;
                     }
@@ -45,6 +44,15 @@ const reducer = produce((state, action) => {
             return state;
         case CART_ORDER:
             state = initialState;
+            return state;
+        case RES_ADD:
+            state.restourants = data;
+            return state;
+        case DISHES_ADD:
+            state.dishes = data;
+            return state;
+        case TYPES_ADD:
+            state.types = data;
             return state;
         default:
             return state;
