@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import SearchBox from '../Components/SearchBox';
 import Range from '../Components/Range';
@@ -9,7 +9,7 @@ import useFetch from '../Hooks/useFetch';
 import '../Css/Pages/Restourant.css';
 
 const Restourant = () => {
-    const {data, isLoading, fetchData} = useFetch();
+    const {isLoading, fetchData} = useFetch();
     const {id} = useParams();
     const history = useHistory();
     
@@ -41,7 +41,7 @@ const Restourant = () => {
                 <SearchBox onChange = {onChangeText} placeholder = 'Type the name of the dish' />
                 <Range onChange = {onChangeRange} />
             </div>
-            <MenuList data = {data} isLoading = {isLoading} resId = {id} />
+            <MenuList isLoading = {isLoading} resId = {id} />
         </div>
     )
 }

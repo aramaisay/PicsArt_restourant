@@ -10,7 +10,7 @@ import '../Css/Pages/Main.css';
 const Main = () => {
     const [text, setText] = useState('');
     const [cuisine, setCuisine] = useState('arm');
-    const {isLoading, data, fetchData} = useFetch();
+    const {isLoading, fetchData} = useFetch();
 
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const Main = () => {
                 <SearchBox onChange = {onChangeText} placeholder = 'Search for the available restourants'  />
                 <DropBox onChange = {onChangeDropBox}  />
             </div>
-            <RestourantList data = {data} isLoading = {isLoading} ></RestourantList>
+            <RestourantList isLoading = {isLoading} ></RestourantList>
         </div>
     )
 }

@@ -3,10 +3,13 @@ import { isEqual } from 'lodash';
 
 import Loader from './Loader';
 import MenuCard from './MenuCard';
+import { useSelector } from 'react-redux';
+import { dishesSelector } from '../Redux/Selectors';
 
 import '../Css/Components/Menu.css';
 
-const MenuList = ({ data, isLoading, resId }) => {
+const MenuList = ({ isLoading, resId }) => {
+    const data = useSelector(dishesSelector)
     return (
         isLoading?
         <Loader/>:

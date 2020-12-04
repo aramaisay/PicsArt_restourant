@@ -1,12 +1,15 @@
 import React, { memo } from 'react';
+import { useSelector } from 'react-redux';
 import { isEqual } from 'lodash';
 
 import Loader from './Loader';
 import RestourantCard from './RestourantCard';
+import { restourantSelector } from '../Redux/Selectors';
 
 import '../Css/Components/RestourantList.css'
 
-const RestourantList = ({ data, isLoading }) => {
+const RestourantList = ({ isLoading }) => {
+    const data = useSelector(restourantSelector)
     return (
         isLoading?
         <Loader></Loader>

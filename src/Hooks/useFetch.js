@@ -30,7 +30,7 @@ export const fillTheStore = async (type, payload) => {
                 } 
             })
             const menusData = await menusRes.json();
-            const ourMenu = menusData.find((item) => item.restourantId === resId);
+            const ourMenu = menusData.find((item) => item.restourantId === parseInt(resId));
             const dishesRes = await fetch('data/dishes.json', {
                 headers : { 
                     'Content-Type': 'application/json',
