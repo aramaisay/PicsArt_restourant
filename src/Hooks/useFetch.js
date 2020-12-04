@@ -1,89 +1,88 @@
 import { useState } from 'react';
 
 import store from '../Redux/Store';
+import { DISHES_ADD_OBJ, RES_ADD_OBJ, TYPES_ADD_OBJ } from '../Redux/Actions';
 
-const cache = new Map();
-
-export const createCache = (type, payload) => {
+export const fillTheStore = async (type, payload) => {
     const { text, min, max, resId, kitchenType } = payload;
     const capitalized = text.toUpperCase();
-    return new Promise((resolve) => {
-        switch(type) {
-            case 'resSearch':
-                const data = store.getState()[0];
-                const filtered = data.filter((item) => {
-                    if(item.name.toUpperCase().includes(capitalized) && item.kitchenTypes.includes(kitchenType)) {
-                        return true;
-                    }
-                    return false;
-                })
-                if(cache.has(kitchenType)) {
-                    cache.get(kitchenType).set(capitalized, filtered);
+    switch(type) {
+        case 'resSearch':
+            const res = await fetch('data/restaurants.json', {
+                headers : { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }});
+            const data = await res.json();
+            const filtered = data.filter((item) => {
+                if(item.name.toUpperCase().includes(capitalized) && item.kitchenTypes.includes(kitchenType)) {
+                    return true;
                 }
-                else {
-                    cache.set(kitchenType,new Map().set(capitalized,filtered))
+                return false;
+            })
+            store.dispatch(RES_ADD_OBJ(filtered));
+            return;
+        case 'menuSearch':
+            const menusRes = await fetch('data/menus.json', {
+                headers : { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                } 
+            })
+            const menusData = await menusRes.json();
+            const ourMenu = menusData.find((item) => item.restourantId === resId);
+            const dishesRes = await fetch('data/dishes.json', {
+                headers : { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 }
-                resolve(filtered) ;
-            case 'menuSearch':
-                const Data = store.getState()[1][resId-1];
-                const Filtered = Data.filter((item) => {
-                    if(item.name.toUpperCase().includes(capitalized) && item.price >= min && item.price <= max) {
-                        return true;
-                    }
-                    return false;
-                })
-                if(cache.has(resId)){
-                    cache.get(resId).set(`${min}${max}${capitalized}`, Filtered);
+            });
+            const dishesData = await dishesRes.json();
+
+            const Filtered = dishesData.filter((item) => {
+                if( ourMenu.dishes.includes(item.id) && item.name.toUpperCase().includes(capitalized) && item.price >= min && item.price <= max ) {
+                    return true;
                 }
-                else {
-                    cache.set(resId, new Map().set(`${min}${max}${capitalized}`, Filtered));                
+                return false;
+            })
+            store.dispatch(DISHES_ADD_OBJ(Filtered))
+            return ;
+        case 'getTypes':
+            const typesRes = await fetch('data/kitchenTypes.json', {
+                headers : { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 }
-                resolve(Filtered);
-            default:
-                return;
-        }
-    })
+            });
+            const typesData = await typesRes.json();
+            store.dispatch(TYPES_ADD_OBJ(typesData));
+            return;
+        default:
+            return;
+    }
 }
 
 const useFetch = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [data, setData] = useState(null);
 
     const fetchData = async (type, payload) => {
         setIsLoading(true);
-        const {text, min, max, resId, kitchenType} = payload;
-        const capitalized = text.toUpperCase();
         switch(type) {
             case 'resSearch':
-                if(cache.has(kitchenType)) {
-                    const typeCache = cache.get(kitchenType);
-                    if(typeCache.has(capitalized)){
-                        setData(typeCache.get(capitalized));
-                        setIsLoading(false);
-                        return;
-                    }
-                }
-                await createCache(type, payload);
-                fetchData(type, payload);
+                await fillTheStore(type, payload);
+                setIsLoading(false);
                 return;
             case 'menuSearch':
-                if(cache.has(resId)) {
-                    const resCache = cache.get(resId);
-                    if(resCache.has(`${min}${max}${capitalized}`)){
-                        setData(resCache.get(`${min}${max}${capitalized}`));
-                        setIsLoading(false);
-                        return;
-                    }
-                }
-                await createCache(type,payload);
-                fetchData(type, payload);
+                await fillTheStore(type,payload);
+                setIsLoading(false);
                 return;
             default:
+                setIsLoading(false);
                 return;
         }
     }
     
-    return {isLoading, data, fetchData};
+    return {isLoading, fetchData};
 }
 
 export default useFetch;
