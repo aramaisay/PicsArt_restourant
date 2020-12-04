@@ -9,10 +9,10 @@ import menu6 from './menus/6.json';
 
 const menus = [menu1, menu2, menu3, menu4, menu5, menu6];
 
-export const initialState = [
-    restourants,
-    menus,
-    types,
-    [],
-    0
-];
+export const initialState = {
+    restourants: restourants,
+    menus: menus,
+    types: types,
+    cart: [],
+    price: 0
+};
